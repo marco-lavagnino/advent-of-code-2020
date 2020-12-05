@@ -68,3 +68,34 @@ for index, row in enumerate(occupied_seats):
 # %%
 # it printed:
 # free seat at row 66, column 4, id 532
+
+
+# THE MOST ELEGANT WAY:
+# it works because the seat codes are just binary number strings
+# replacing 0 and 1 with letters.
+
+
+def get_seat_id(seat_code):
+    binary_string = (
+        seat_code.replace("F", "0")
+        .replace("L", "0")
+        .replace("B", "1")
+        .replace("R", "1")
+    )
+    return int(binary_string, 2)
+
+
+with open("input.txt") as f:
+    seat_ids = [get_seat_id(seat_code) for seat_code in f.read().split("\n")]
+
+max_id = max(seat_ids)
+min_id = min(seat_ids)
+
+print(f"max:{max_id} min:{min_id}")
+
+# no need to build plane
+for i in range(min_id, max_id):
+    if i not in seat_ids:
+        print(f"seat with id {i} is empty")
+
+# %%
