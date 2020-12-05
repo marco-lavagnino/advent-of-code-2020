@@ -2,26 +2,12 @@
 #%%
 
 
-def binary_search(lower_bound_char, chars):
-    lower_bound = 0
-    upper_bound = 2 ** len(chars)
-
-    for char in chars:
-        new_bound = (upper_bound + lower_bound) // 2
-        if char == lower_bound_char:
-            upper_bound = new_bound
-        else:
-            lower_bound = new_bound
-
-    return lower_bound
-
-
 def get_seat(seat_code):
     row_chars = seat_code[:7]
     column_chars = seat_code[7:]
 
-    row = binary_search("F", row_chars)
-    column = binary_search("L", column_chars)
+    row = int(row_chars.replace("F", "0").replace("B", "1"), 2)
+    column = int(column_chars.replace("L", "0").replace("R", "1"), 2)
     seat_id = row * 8 + column
 
     return row, column, seat_id
