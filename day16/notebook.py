@@ -88,8 +88,10 @@ def part_two():
         (
             num
             for index, num in enumerate(my_ticket)
-            if possible_fields[index]
-            and "departure" in next(iter(possible_fields[index]))
+            if (
+                possible_fields[index]  # some fields are not used, this filters them
+                and "departure" in next(iter(possible_fields[index]))
+            )
         ),
     )
 
